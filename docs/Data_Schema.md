@@ -221,7 +221,7 @@ export interface SimulationResult {
   metrics: FitMetrics;
   fitGrade: "good" | "conditional" | "not-recommended";
   fitScore: number; // 0~100
-  scoringVersion: string; // e.g. "v1.0.0"
+  scoringVersion: string; // SemVer 형식 "v1.0.0", 규칙은 POV_Logic_Spec §5.5 참조
   warnings: string[];
   createdAt: ISODate;
 }
@@ -301,7 +301,7 @@ UserProfile (1) ---- (1) Cart ---- (N) CartItem ---- (1) Product
 ## 7) Internal Metric Policy (단위 일관성 정책)
 
 - [ ] DB/API 영속 레이어는 `heightCm`만 저장한다.
-- [ ] 프론트엔드 상태도 `heightCm`만 저장하고, 계산 시 selector/getter에서 `heightM`를 파생한다.
+- [ ] 프론트엔드 상태도 `heightCm`만 저장하고, 계산 시 selector/getter에서 `heightM`을 파생한다.
 - [ ] 모든 점수 산식과 사용자 적합성 계산의 기준 단위는 `cm`로 고정한다.
 - [ ] 3D 렌더링 좌표와 씬 배치 계산은 `m`를 사용한다.
 - [ ] UI 출력(여유 공간, 눈높이 차이)은 `cm` 변환 값을 사용하되, 원시 계산 값(`m`)도 디버그 로그에 유지한다.
@@ -326,7 +326,7 @@ export const selectHeightM = (state: { userProfile: { heightCm: number } }) =>
 
 ```json
 {
-  "id": "prd_desk_001",
+  "id": "550e8400-e29b-41d4-a716-446655440001",
   "sku": "DESK-1200-WOOD",
   "name": "홈오피스 데스크 1200",
   "category": "desk",

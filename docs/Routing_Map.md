@@ -105,6 +105,22 @@ app/
 - [ ] 공유용 CTA 기본 동작: `현재 POV 공유` 클릭 시 `share` 기반 URL을 복사한다.
 - [ ] 공유용 CTA 고급 옵션: 사용자가 명시적으로 동의한 경우에만 원시 파라미터 URL을 복사한다.
 
+### share 파라미터 유효/무효 정의
+
+- [ ] **유효**: `share` 쿼리 존재 + 서버에서 해당 식별자 조회 성공 → POV 설정(state) 반환
+- [ ] **무효**: `share` 없음, 또는 조회 실패(404/만료/삭제), 또는 형식 불일치
+- [ ] 구현: 파서는 `share` 존재 시 서버 검증 후, 성공 시 `share` 채택, 실패 시 다음 우선순위(raw query)로 폴백
+
+### Deep Link 우선순위 테스트 케이스
+
+- [ ] **케이스 A**: `share` 유효 + raw query 존재 → `share` 채택
+- [ ] **케이스 B**: `share` 무효 + raw query 유효 → raw query 채택
+- [ ] **케이스 C**: `share`/raw query 모두 없음 + localProfile 존재 → localProfile 채택
+- [ ] **케이스 D**: 모두 없음/무효 → default 채택
+- [ ] **케이스 E**: raw query 일부만 유효 → 유효 필드만 반영 + 나머지 폴백
+- [ ] **케이스 F**: 파싱 결과 URL 정규화(불필요 파라미터 제거) 확인
+- [ ] **케이스 G**: 개인정보 보호 검증(기본 공유 URL은 `share`만 노출, raw query 미포함)
+
 ## API 라우트 책임
 
 - [ ] `GET /api/products`: 필터 기반 목록 조회

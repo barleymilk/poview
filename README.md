@@ -109,12 +109,14 @@ Deep Link 정책:
 - 컴포넌트 구조(Atomic): `docs/Component_Hierarchy.md`
 - POV 로직 명세: `docs/POV_Logic_Spec.md`
 - 데이터 스키마: `docs/Data_Schema.md`
+- 단위 정책 테스트 명세: `docs/Unit_Policy_Test_Spec.md`
+- Analytics 이벤트 스키마: `docs/Analytics_Event_Schema.md`
 - 구현 계획(Lock-in): `docs/ImplementationPlan.md`
 
 ## 현재 상태 (업데이트 규칙 포함)
 
 - 마지막 업데이트: `2026-03-10`
-- 현재 마일스톤: `M0 - 설계 Lock-in 완료`
+- 현재 마일스톤: `M0 - 설계 Lock-in 완료` (Lock-in 4개 항목 확정됨)
 - 다음 마일스톤: `M1 - Next.js 스캐폴딩 및 타입/테스트 기본선 구축`
 - 유지 규칙: 스프린트/릴리즈 변경 또는 핵심 설계 변경(라우팅/단위 정책/산식/deep link) 시 이 섹션을 반드시 갱신한다.
 
