@@ -83,6 +83,12 @@ function resolveDeltaScore(deltaEyeToTopCm: number): number {
   return clamp(0, 100, 100 - deltaDeviationCm * 2.5);
 }
 
+export function calculateFinalScoreFromBreakdown(breakdown: PovScoreBreakdown): number {
+  const weightedScore =
+    0.4 * breakdown.angleScore + 0.4 * breakdown.clearanceScore + 0.2 * breakdown.deltaScore;
+  return Math.round(clamp(0, 100, weightedScore));
+}
+
 export function calculatePovScore(input: PovScoreInput): PovScoreOutput {
   const topY = input.topY ?? 0.72;
   const eyeY = resolveEyeY(input.heightCm, input.mode);
@@ -104,8 +110,11 @@ export function calculatePovScore(input: PovScoreInput): PovScoreOutput {
   const angleScore = resolveAngleScore(viewAngleDeg);
   const clearanceScore = resolveClearanceScore(legClearanceCm);
   const deltaScore = resolveDeltaScore(deltaEyeToTopCm);
-  const weightedScore = 0.4 * angleScore + 0.4 * clearanceScore + 0.2 * deltaScore;
-  const finalScore = Math.round(clamp(0, 100, weightedScore));
+  const finalScore = calculateFinalScoreFromBreakdown({
+    angleScore,
+    clearanceScore,
+    deltaScore,
+  });
   const fitGrade = fitGradeFromScore(finalScore);
 
   return {

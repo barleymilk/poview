@@ -93,6 +93,33 @@ export interface ProductCompatibility {
   notes?: string[];
 }
 
+export interface ProductMaterialSet {
+  basePresetId: string;
+  presets: ProductMaterialPreset[];
+  meshBindings: MaterialMeshBinding[];
+}
+
+export interface ProductMaterialPreset {
+  id: string;
+  label: string;
+  swatches: MaterialSwatch[];
+}
+
+export interface MaterialSwatch {
+  slot: string;
+  materialType: "wood" | "steel" | "fabric" | "leather" | "plastic" | "glass";
+  baseColorHex: string;
+  roughness?: number;
+  metalness?: number;
+  normalScale?: number;
+  textureUrl?: string;
+}
+
+export interface MaterialMeshBinding {
+  slot: string;
+  meshNames: string[];
+}
+
 export interface Product {
   id: UUID;
   sku: string;
@@ -102,6 +129,7 @@ export interface Product {
   price: Money;
   tags: string[];
   dimensions: ProductDimensions;
+  materials?: ProductMaterialSet;
   assets: ProductAsset;
   compatibility?: ProductCompatibility;
   createdAt: ISODate;

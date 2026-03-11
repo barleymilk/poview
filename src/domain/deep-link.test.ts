@@ -71,4 +71,35 @@ describe("parseDeepLink", () => {
     expect(result.source).toBe("default");
     expect(result.state).toEqual(defaultState);
   });
+
+  it("raw query 일부만 유효하면 유효 필드만 반영한다", () => {
+    const result = parseDeepLink({
+      query: new URLSearchParams("heightCm=200&mode=invalid&distanceToTargetM=9"),
+      defaultState,
+    });
+
+    expect(result.source).toBe("raw-query");
+    expect(result.state).toEqual({
+      heightCm: 200,
+      mode: "standing",
+      distanceToTargetM: 0.8,
+    });
+  });
+
+  it("distanceToTargetM 키만 거리 입력으로 허용한다", () => {
+    const wrongKeyResult = parseDeepLink({
+      query: new URLSearchParams("distanceToTarget=1.2"),
+      defaultState,
+    });
+    const rightKeyResult = parseDeepLink({
+      query: new URLSearchParams("distanceToTargetM=1.2"),
+      defaultState,
+    });
+
+    expect(wrongKeyResult.source).toBe("default");
+    expect(wrongKeyResult.state.distanceToTargetM).toBe(0.8);
+
+    expect(rightKeyResult.source).toBe("raw-query");
+    expect(rightKeyResult.state.distanceToTargetM).toBe(1.2);
+  });
 });
