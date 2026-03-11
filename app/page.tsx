@@ -12,7 +12,7 @@ export default function Home() {
         <Link className="pill" href="/product/demo-product">
           /product/[productId]
         </Link>
-        <Link className="pill" href="/simulator/demo-product">
+        <Link className="pill" href="/simulator/desk-1200-wood">
           /simulator/[productId]
         </Link>
         <Link className="pill" href="/recommendations">

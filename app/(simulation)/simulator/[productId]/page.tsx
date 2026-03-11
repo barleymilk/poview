@@ -1,15 +1,18 @@
+import { notFound } from "next/navigation";
+import { SimulatorClient } from "@/src/components/simulator-client";
+import { getProductById } from "@/src/mocks/products";
+
 interface SimulatorPageProps {
   params: Promise<{ productId: string }>;
 }
 
 export default async function SimulatorPage({ params }: SimulatorPageProps) {
   const { productId } = await params;
+  const product = getProductById(productId);
 
-  return (
-    <main>
-      <h2>SimulatorPage</h2>
-      <p>POV 시뮬레이터 라우트: `/simulator/{productId}`</p>
-      <p>productId: {productId}</p>
-    </main>
-  );
+  if (!product) {
+    notFound();
+  }
+
+  return <SimulatorClient product={product} />;
 }

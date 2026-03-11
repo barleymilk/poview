@@ -8,10 +8,13 @@ export default function SimulationLayout({
       <h1>Simulation Layout</h1>
       <p>POV 몰입형 시뮬레이션 레이아웃입니다.</p>
       <nav>
-        <Link className="pill" href="/simulator/demo-product">
-          Simulator
+        <Link className="pill" href="/simulator/desk-1200-wood">
+          Simulator (desk-1200-wood)
         </Link>
-        <Link className="pill" href="/product/demo-product">
+        <Link className="pill" href="/simulator/desk-1200-wood?share=pov-desk-focus">
+          Share Deep Link
+        </Link>
+        <Link className="pill" href="/product/desk-1200-wood">
           Back to Product
         </Link>
       </nav>
